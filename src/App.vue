@@ -12,7 +12,10 @@
     </header>
     <main class="flex-grow flex flex-col justify-center space-y-4">
       <div class="flex flex-col">
-        <h1 @click="this.active = true">{{ instructions }}</h1>
+        <h1 class="flex md:hidden">Use the buttons below to interact</h1>
+        <h1 class="hidden md:flex">
+          {{ instructions }}
+        </h1>
         <p :class="[status ? 'text-emerald-500' : 'text-red-500']">
           Sticky keys are {{ status ? "on" : "off" }}
         </p>
@@ -26,9 +29,7 @@
     <footer
       class="text-sm flex flex-col md:flex-row space-y-2 md:space-y-0 md:justify-between"
     >
-      <p>
-        Not affilcated with Microsoft. I made this for fun and nostalgic reasons
-      </p>
+      <p>Not affiliated with Microsoft</p>
       <a
         href="https://github.com/dgrinbergs/sticky-board"
         target="_blank"
@@ -79,15 +80,11 @@ export default defineComponent({
           action: (status: boolean) => status,
         },
       ],
-      active: false,
       status: false,
     };
   },
   computed: {
     instructions() {
-      if (!this.active) {
-        return "Click me!";
-      }
       if (this.status) {
         return "Use '1' and '2' to beep and 'backspace' to turn sticky keys off.";
       } else {
